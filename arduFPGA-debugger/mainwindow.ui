@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_FLASH_File"/>
+    <addaction name="actionOpen_RAM"/>
+    <addaction name="actionOpen_EEPROM_File"/>
+    <addaction name="actionOpen_COM"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionInterface_setup"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionRead_FLASH"/>
+    <addaction name="actionRead_RAM"/>
+    <addaction name="actionRead_EEPROM"/>
+    <addaction name="actionWrite_FLASH"/>
+    <addaction name="actionWrite_RAM"/>
+    <addaction name="actionWrite_EEPROM"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuTools"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen_FLASH_File">
+   <property name="text">
+    <string>Open FLASH File</string>
+   </property>
+  </action>
+  <action name="actionOpen_EEPROM_File">
+   <property name="text">
+    <string>Open EEPROM File</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionInterface_setup">
+   <property name="text">
+    <string>Interface setup</string>
+   </property>
+  </action>
+  <action name="actionOpen_COM">
+   <property name="text">
+    <string>Open COM</string>
+   </property>
+  </action>
+  <action name="actionOpen_RAM">
+   <property name="text">
+    <string>Open RAM</string>
+   </property>
+  </action>
+  <action name="actionRead_FLASH">
+   <property name="text">
+    <string>Read FLASH</string>
+   </property>
+  </action>
+  <action name="actionRead_RAM">
+   <property name="text">
+    <string>Read RAM</string>
+   </property>
+  </action>
+  <action name="actionRead_EEPROM">
+   <property name="text">
+    <string>Read EEPROM</string>
+   </property>
+  </action>
+  <action name="actionWrite_FLASH">
+   <property name="text">
+    <string>Write FLASH</string>
+   </property>
+  </action>
+  <action name="actionWrite_RAM">
+   <property name="text">
+    <string>Write RAM</string>
+   </property>
+  </action>
+  <action name="actionWrite_EEPROM">
+   <property name="text">
+    <string>Write EEPROM</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
