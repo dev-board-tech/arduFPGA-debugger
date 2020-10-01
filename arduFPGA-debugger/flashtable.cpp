@@ -13,6 +13,9 @@ flashTable::flashTable(QWidget *parent, QSerialPort *serial) :
     ui->setupUi(this);
     this->serial = serial;
     scrollPosition = 0;
+    lastPushedLoad = false;
+    lastPushedCompare = false;
+    memoryArray.resize(def::flashSize);
 
     int rows = def::flashSize / 16;
     if(rows * 16 != def::flashSize) {
@@ -56,7 +59,7 @@ flashTable::~flashTable()
     delete ui;
 }
 
-bool flashTable::readMemory(int readStart, int readEnd) {
+bool flashTable::readMemory(int readStart, int readEnd, bool load, bool compare) {
     if(readEnd > def::flashSize - 1) {
         readEnd = def::flashSize;
     }
@@ -81,9 +84,29 @@ bool flashTable::readMemory(int readStart, int readEnd) {
                 for (int cntH = startX; cntH < endX; cntH++) {
                     QStandardItem *item = model->itemFromIndex(model->index(cntV, cntH));
                     if(item != 0) {
-                        item->setText(QString::asprintf("%02X", (uint8_t)array.at(cntItems)));
-                        cntItems++;
+                        char arrayValue = array.at(cntItems);
+                        if(compare) {
+                            if(arrayValue != memoryArray.at(cntItems)) {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                item->setForeground(QBrush(Qt::red));
+                            } else {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                if(load) {
+                                    item->setForeground(QBrush(Qt::black));
+                                }
+                            }
+                        }
+                        if(load) {
+                            if(!compare) {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                item->setForeground(QBrush(Qt::black));
+                            }
+                            memoryArray[cntItems] = arrayValue;
+                        }
+                    } else {
+                        item->setForeground(QBrush(Qt::black));
                     }
+                    cntItems++;
                 }
             }
             return true;
@@ -122,10 +145,40 @@ void flashTable::windowRfsh() {
     int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
     int readStart = scrollPosition * 16;
     int readEnd = ((scrollPosition + visibleItems) * 16);
-    readMemory(readStart,readEnd);
+    readMemory(readStart,readEnd, lastPushedLoad, lastPushedCompare);
 }
 
 void flashTable::on_readMemoryPushButton_clicked()
 {
-    readMemory(0, def::flashSize);
+    readMemory(0, def::flashSize, true, false);
+}
+
+void flashTable::on_refreshWindowPushButton_clicked()
+{
+    lastPushedLoad = true;
+    lastPushedCompare = false;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, true, false);
+}
+
+void flashTable::on_refreshCompareWindowPushButton_clicked()
+{
+    lastPushedLoad = true;
+    lastPushedCompare = true;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, true, true);
+}
+
+void flashTable::on_compareWindowPushButton_clicked()
+{
+    lastPushedLoad = false;
+    lastPushedCompare = true;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, false, true);
 }

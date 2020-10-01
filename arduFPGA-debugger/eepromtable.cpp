@@ -10,6 +10,10 @@ eepromTable::eepromTable(QWidget *parent, QSerialPort *serial) :
     ui->setupUi(this);
     this->serial = serial;
     scrollPosition = 0;
+    lastPushedLoad = false;
+    lastPushedCompare = false;
+    memoryArray.resize(def::eepromSize);
+
 
     int rows = def::eepromSize / 16;
     if(rows * 16 != def::eepromSize) {
@@ -54,7 +58,7 @@ eepromTable::~eepromTable()
     delete ui;
 }
 
-bool eepromTable::readMemory(int readStart, int readEnd) {
+bool eepromTable::readMemory(int readStart, int readEnd, bool load, bool compare) {
     if(readEnd > def::eepromSize - 1) {
         readEnd = def::eepromSize;
     }
@@ -79,9 +83,29 @@ bool eepromTable::readMemory(int readStart, int readEnd) {
                 for (int cntH = startX; cntH < endX; cntH++) {
                     QStandardItem *item = model->itemFromIndex(model->index(cntV, cntH));
                     if(item != 0) {
-                        item->setText(QString::asprintf("%02X", (uint8_t)array.at(cntItems)));
-                        cntItems++;
+                        char arrayValue = array.at(cntItems);
+                        if(compare) {
+                            if(arrayValue != memoryArray.at(cntItems)) {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                item->setForeground(QBrush(Qt::red));
+                            } else {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                if(load) {
+                                    item->setForeground(QBrush(Qt::black));
+                                }
+                            }
+                        }
+                        if(load) {
+                            if(!compare) {
+                                item->setText(QString::asprintf("%02X", (uint8_t)arrayValue));
+                                item->setForeground(QBrush(Qt::black));
+                            }
+                            memoryArray[cntItems] = arrayValue;
+                        }
+                    } else {
+                        item->setForeground(QBrush(Qt::black));
                     }
+                    cntItems++;
                 }
             }
             return true;
@@ -120,10 +144,40 @@ void eepromTable::windowRfsh() {
     int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
     int readStart = scrollPosition * 16;
     int readEnd = ((scrollPosition + visibleItems) * 16);
-    readMemory(readStart,readEnd);
+    readMemory(readStart,readEnd, lastPushedLoad, lastPushedCompare);
 }
 
 void eepromTable::on_readMemoryPushButton_clicked()
 {
-    readMemory(0, def::eepromSize);
+    readMemory(0, def::eepromSize, true, false);
+}
+
+void eepromTable::on_refreshWindowPushButton_clicked()
+{
+    lastPushedLoad = true;
+    lastPushedCompare = false;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, true, false);
+}
+
+void eepromTable::on_refreshCompareWindowPushButton_clicked()
+{
+    lastPushedLoad = true;
+    lastPushedCompare = true;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, true, true);
+}
+
+void eepromTable::on_compareWindowPushButton_clicked()
+{
+    lastPushedLoad = false;
+    lastPushedCompare = true;
+    int visibleItems = (tableView->geometry().height() / tableView->rowHeight(0));
+    int readStart = scrollPosition * 16;
+    int readEnd = ((scrollPosition + visibleItems) * 16);
+    readMemory(readStart,readEnd, false, true);
 }

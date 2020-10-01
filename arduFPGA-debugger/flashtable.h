@@ -24,7 +24,7 @@ class flashTable : public QDialog
 public:
     explicit flashTable(QWidget *parent = nullptr, QSerialPort *serial = nullptr);
     ~flashTable();
-    bool readMemory(int, int);
+    bool readMemory(int, int, bool, bool);
 
 private:
     Ui::flashTable *ui;
@@ -33,6 +33,9 @@ private:
     QSerialPort *serial;
     QTimer rfshTimer;
     int scrollPosition;
+    QByteArray memoryArray;
+    bool lastPushedLoad;
+    bool lastPushedCompare;
 
 protected:
     void showEvent(QShowEvent *) override;
@@ -42,6 +45,9 @@ public slots:
     void windowRfsh();
 private slots:
     void on_readMemoryPushButton_clicked();
+    void on_refreshWindowPushButton_clicked();
+    void on_refreshCompareWindowPushButton_clicked();
+    void on_compareWindowPushButton_clicked();
 };
 
 #endif // FLASHTABLE_H

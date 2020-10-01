@@ -19,7 +19,7 @@ class ramTable : public QDialog
 public:
     explicit ramTable(QWidget *parent = nullptr, QSerialPort *serial = nullptr);
     ~ramTable();
-    bool readMemory(int, int);
+    bool readMemory(int, int, bool, bool);
 
 private:
     Ui::ramTable *ui;
@@ -28,6 +28,10 @@ private:
     QSerialPort *serial;
     QTimer rfshTimer;
     int scrollPosition;
+    QByteArray memoryArray;
+    bool lastPushedLoad;
+    bool lastPushedCompare;
+
 protected:
     void showEvent(QShowEvent *) override;
     virtual void resizeEvent(QResizeEvent *) override;
@@ -36,6 +40,9 @@ public slots:
     void windowRfsh();
 private slots:
     void on_readMemoryPushButton_clicked();
+    void on_refreshWindowPushButton_clicked();
+    void on_refreshCompareWindowPushButton_clicked();
+    void on_compareWindowPushButton_clicked();
 };
 
 #endif // RAMTABLE_H
