@@ -13,7 +13,21 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>781</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -27,6 +41,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionOpen_File"/>
     <addaction name="actionOpen_COM"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -41,8 +56,30 @@
     <property name="title">
      <string>Tools</string>
     </property>
-    <addaction name="actionMemory"/>
-    <addaction name="actionIO"/>
+    <addaction name="actionOpen_Memory_Window_1"/>
+    <addaction name="actionOpen_Memory_Window_2"/>
+    <addaction name="actionOpen_Memory_Window_3"/>
+    <addaction name="actionOpen_Memory_Window_4"/>
+    <addaction name="actionOpen_Memory_Window_5"/>
+    <addaction name="actionOpen_Memory_Window_6"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_IO_Window_1"/>
+    <addaction name="actionOpen_IO_Window_2"/>
+    <addaction name="actionOpen_IO_Window_3"/>
+    <addaction name="actionOpen_IO_Window_4"/>
+    <addaction name="actionOpen_IO_Window_5"/>
+    <addaction name="actionOpen_IO_Window_6"/>
+    <addaction name="actionOpen_IO_Window_7"/>
+    <addaction name="actionOpen_IO_Window_8"/>
+    <addaction name="actionOpen_IO_Window_9"/>
+    <addaction name="actionOpen_IO_Window_10"/>
+    <addaction name="actionOpen_IO_Window_11"/>
+    <addaction name="actionOpen_IO_Window_12"/>
+    <addaction name="actionOpen_IO_Window_13"/>
+    <addaction name="actionOpen_IO_Window_14"/>
+    <addaction name="actionOpen_IO_Window_15"/>
+    <addaction name="actionOpen_IO_Window_16"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -64,44 +101,119 @@
     <string>Open COM</string>
    </property>
   </action>
-  <action name="actionRead_FLASH">
+  <action name="actionOpen_File">
    <property name="text">
-    <string>Read FLASH</string>
+    <string>Open File</string>
    </property>
   </action>
-  <action name="actionRead_RAM">
+  <action name="actionOpen_Memory_Window_1">
    <property name="text">
-    <string>Read RAM</string>
+    <string>Open Memory Window 1</string>
    </property>
   </action>
-  <action name="actionRead_EEPROM">
+  <action name="actionOpen_Memory_Window_2">
    <property name="text">
-    <string>Read EEPROM</string>
+    <string>Open Memory Window 2</string>
    </property>
   </action>
-  <action name="actionWrite_FLASH">
+  <action name="actionOpen_Memory_Window_3">
    <property name="text">
-    <string>Write FLASH</string>
+    <string>Open Memory Window 3</string>
    </property>
   </action>
-  <action name="actionWrite_RAM">
+  <action name="actionOpen_Memory_Window_4">
    <property name="text">
-    <string>Write RAM</string>
+    <string>Open Memory Window 4</string>
    </property>
   </action>
-  <action name="actionWrite_EEPROM">
+  <action name="actionOpen_Memory_Window_5">
    <property name="text">
-    <string>Write EEPROM</string>
+    <string>Open Memory Window 5</string>
    </property>
   </action>
-  <action name="actionMemory">
+  <action name="actionOpen_Memory_Window_6">
    <property name="text">
-    <string>Memory</string>
+    <string>Open Memory Window 6</string>
    </property>
   </action>
-  <action name="actionIO">
+  <action name="actionOpen_IO_Window_1">
    <property name="text">
-    <string>IO</string>
+    <string>Open IO Window 1</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_2">
+   <property name="text">
+    <string>Open IO Window 2</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_3">
+   <property name="text">
+    <string>Open IO Window 3</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_4">
+   <property name="text">
+    <string>Open IO Window 4</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_5">
+   <property name="text">
+    <string>Open IO Window 5</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_6">
+   <property name="text">
+    <string>Open IO Window 6</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_7">
+   <property name="text">
+    <string>Open IO Window 7</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_8">
+   <property name="text">
+    <string>Open IO Window 8</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_9">
+   <property name="text">
+    <string>Open IO Window 9</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_10">
+   <property name="text">
+    <string>Open IO Window 10</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_11">
+   <property name="text">
+    <string>Open IO Window 11</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_12">
+   <property name="text">
+    <string>Open IO Window 12</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_13">
+   <property name="text">
+    <string>Open IO Window 13</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_14">
+   <property name="text">
+    <string>Open IO Window 14</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_15">
+   <property name="text">
+    <string>Open IO Window 15</string>
+   </property>
+  </action>
+  <action name="actionOpen_IO_Window_16">
+   <property name="text">
+    <string>Open IO Window 16</string>
    </property>
   </action>
  </widget>
