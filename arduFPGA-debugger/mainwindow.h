@@ -4,9 +4,8 @@
 #include <QMainWindow>
 
 #include "serialportsetup.h"
-#include "flashtable.h"
-#include "ramtable.h"
-#include "eepromtable.h"
+#include "memorywindow.h"
+#include "iowindow.h"
 #include "qserialport.h"
 
 
@@ -23,25 +22,19 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionOpen_FLASH_File_triggered();
-    void on_actionOpen_RAM_triggered();
-    void on_actionOpen_EEPROM_File_triggered();
-    void on_actionExit_triggered();
     void on_actionInterface_setup_triggered();
+
     void on_actionOpen_COM_triggered();
+    void on_actionExit_triggered();
 
-    void on_actionRead_FLASH_triggered();
-
-    void on_actionRead_RAM_triggered();
-
-    void on_actionRead_EEPROM_triggered();
+    void on_actionMemory_triggered();
+    void on_actionIO_triggered();
 
 private:
     Ui::MainWindow *ui;
     serialPortSetup *serialPortWindow;
-    flashTable *flashTableWindow;
-    ramTable *ramTableWindow;
-    eepromTable *eepromTableWindow;
+    memoryWindow *memoryWin;
+    ioWindow *ioWin;
 
     QSerialPort serial;
     QString comPort;

@@ -12,17 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle(mainTitle);
     serialPortWindow = new serialPortSetup(this);
-    flashTableWindow = new flashTable(this, &serial);
-    ramTableWindow = new ramTable(this, &serial);
-    eepromTableWindow = new eepromTable(this, &serial);
+    memoryWin = new memoryWindow(this, &serial);
+    ioWin = new ioWindow(this, &serial);
 }
 
 MainWindow::~MainWindow()
 {
     delete serialPortWindow;
-    delete flashTableWindow;
-    delete ramTableWindow;
-    delete eepromTableWindow;
+    delete memoryWin;
+    delete ioWin;
     delete ui;
 }
 
@@ -77,38 +75,19 @@ void MainWindow::on_actionOpen_COM_triggered()
     }
 }
 
-void MainWindow::on_actionOpen_FLASH_File_triggered()
-{
-    flashTableWindow->show();
-}
-
-void MainWindow::on_actionOpen_RAM_triggered()
-{
-    ramTableWindow->show();
-}
-
-void MainWindow::on_actionOpen_EEPROM_File_triggered()
-{
-    eepromTableWindow->show();
-}
-
-void MainWindow::on_actionRead_FLASH_triggered()
-{
-    flashTableWindow->show();
-}
-
-void MainWindow::on_actionRead_RAM_triggered()
-{
-    ramTableWindow->show();
-}
-
-void MainWindow::on_actionRead_EEPROM_triggered()
-{
-    eepromTableWindow->show();
-}
-
 void MainWindow::on_actionExit_triggered()
 {
     this->close();
 }
 
+
+
+void MainWindow::on_actionMemory_triggered()
+{
+    memoryWin->show();
+}
+
+void MainWindow::on_actionIO_triggered()
+{
+    ioWin->show();
+}

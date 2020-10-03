@@ -11,28 +11,23 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    eepromtable.cpp \
-    flashtable.cpp \
-    listviewdelegate.cpp \
+    iowindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    ramtable.cpp \
+    memorywindow.cpp \
     serialportsetup.cpp
 
 HEADERS += \
     def.h \
-    eepromtable.h \
-    flashtable.h \
-    listviewdelegate.h \
+    iowindow.h \
     mainwindow.h \
-    ramtable.h \
+    memorywindow.h \
     serialportsetup.h
 
 FORMS += \
-    eepromtable.ui \
-    flashtable.ui \
+    iowindow.ui \
     mainwindow.ui \
-    ramtable.ui \
+    memorywindow.ui \
     serialportsetup.ui
 
 # Default rules for deployment.
